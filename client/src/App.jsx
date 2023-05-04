@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
-import { TaskFormPage } from "./pages/TaskFormPage";
-import { TasksPage } from "./pages/TasksPage";
+import { TrutestFormPage } from "./pages/TrutestFormPage"
+import { TrutestsPage } from "./pages/TrustestsPage";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -10,11 +10,11 @@ function App() {
       <div className="container mx-auto">
         <Navigation />
         <Routes>
-          {/* redirect to tasks */}
-          <Route path="/" element={<Navigate to="/tasks" />} />
-          <Route path="/tasks" element={<TasksPage />} />
-          <Route path="/tasks/:id" element={<TaskFormPage />} />
-          <Route path="/tasks-create" element={<TaskFormPage />} />
+          {/* redirect to trutests */}
+          <Route path="/" element={<Navigate to="/trutests" />} />
+          <Route path="/trutests" element={<TrutestsPage />} />
+          <Route path="/trutests/:id" element={<TrutestFormPage />} />
+          <Route path="/trutests-create" element={<TrutestFormPage />} />
         </Routes>
         <Toaster />
       </div>

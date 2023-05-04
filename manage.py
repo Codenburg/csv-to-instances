@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
+"""Django's command-line utility for administrative trutests."""
 import os
 import sys
 
 
 def main():
-    """Run administrative tasks."""
+    """Run administrative trutests."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_crud_api.settings")
     try:
         from django.core.management import execute_from_command_line

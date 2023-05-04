@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes", "django.contrib.sessions",
     "django.contrib.messages", "django.contrib.staticfiles",
     'whitenoise.runserver_nostatic', "corsheaders", "rest_framework",
-    "coreapi", "tasks"
+    "coreapi", "trutests"
 ]
 
 MIDDLEWARE = [
@@ -132,12 +132,18 @@ STATICFILES_DIRS = [
   os.path.join(BASE_DIR, "client", "dist")
 ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
+CSRF_TRUSTED_ORIGINS = ["http://*"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'http://localhost:5173',
+]
 
 CORS_ORIGIN_WHITELIST = ['http://localhost:5173']
 

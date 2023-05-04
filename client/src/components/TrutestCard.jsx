@@ -1,19 +1,19 @@
 import { useNavigate } from "react-router-dom";
 
-export function TaskCard({ task }) {
+export function TrutestCard({ trutest }) {
   const navigate = useNavigate();
 
   return (
     <div
       className="bg-zinc-800 p-3 hover:bg-zinc-700 hover:cursor-pointer"
       onClick={() => {
-        navigate(`/tasks/${task.id}`);
+        navigate(`/trutests/${trutest.id}`);
       }}
     >
       <h1 className="text-white font-bold uppercase rounded-lg">
-        {task.title}
+        {trutest.idv}
       </h1>
-      <p className="text-slate-400">{task.description}</p>
+      <p className="text-slate-400">{trutest.notas}</p>
     </div>
   );
 }
