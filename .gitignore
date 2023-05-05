@@ -5,3 +5,4 @@ staticfiles/
 
 # environment variables
 .env.local
+.env.production
