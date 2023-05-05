@@ -4,5 +4,8 @@ from .models import Trutest
 class TrutestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trutest
-        # fields = ('id', 'title', 'description', 'done')
         fields = '__all__'
+
+class FileSerializer(serializers.Serializer):
+    file = serializers.FileField()
+    

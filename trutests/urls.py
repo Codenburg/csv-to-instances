@@ -5,7 +5,7 @@ from trutests import views
 
 router = routers.DefaultRouter()
 router.register(r"trutests", views.TrutestView, "trutests")
-
+router.register(r"file", views.TrutestCreateView, "create-trutests")
 urlpatterns = [
     path("api/v1/", include(router.urls)),
     path('docs/', include_docs_urls(title='Trutests API')),
