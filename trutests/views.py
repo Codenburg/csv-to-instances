@@ -36,7 +36,7 @@ class TrutestCreateView(viewsets.ModelViewSet):
                             corral=data[None][3],
                             dosis=data[None][4],
                             lote=data[None][5],
-                            vencimineto_lote=data[None][6],
+                            vencimiento_lote=data[None][6],
                             fechafinal_pr=data[None][7],
                             fechafinal_ise=data[None][8],
                             fecha=data[None][9],
