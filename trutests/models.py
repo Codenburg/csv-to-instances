@@ -1,7 +1,7 @@
 from django.db import models
 
 class Trutest(models.Model):
-    file = models.FileField(upload_to='media/')
+    file = models.FileField(upload_to='files/')
     idv = models.CharField(max_length=100, blank=True)#caravana visual
     peso = models.CharField(max_length=100, blank=True)#if file num is equal to 'peso' save him
     notas = models.CharField(max_length=100, blank=True)
