@@ -1,57 +1,60 @@
-from rest_framework import viewsets,status
-from .serializer import TrutestSerializer,FileSerializer
-from .models import Trutest
-from rest_framework.parsers import FileUploadParser
+from rest_framework import generics, status
 from rest_framework.response import Response
-import csv,io,json,re
+from .serializer import TrutestSerializer
+from .models import Animal, CSVFile
 
-class TrutestView(viewsets.ModelViewSet):
+
+from rest_framework import status, viewsets
+from rest_framework.response import Response
+from .serializer import TrutestSerializer
+from .models import Animal, CSVFile
+
+class TrutestListView(viewsets.ModelViewSet):
     serializer_class = TrutestSerializer
-    queryset = Trutest.objects.all()
+    queryset = Animal.objects.all()
 
-class TrutestCreateView(viewsets.ModelViewSet):
-    parser_class = (FileUploadParser,)
-    serializer_class = FileSerializer
+class CSVFileView(viewsets.ModelViewSet):
+    queryset = CSVFile.objects.all()
 
-    def create(self, request, format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            file = serializer.validated_data['file']
-            if file.name.endswith('.csv'):
-                # Leer el archivo CSV
-                csv_data = io.StringIO(file.read().decode('utf-8'))
-                # Convertir el archivo CSV en un objeto JSON
-                json_data = []
-                for row in csv.DictReader(csv_data):
-                    json_data.append(row)
-                # Deserializar los datos JSON en objetos Trutest
-                trutests = []
-                for data in json_data:
-                    if None in data:
-                        trutest = Trutest.objects.create(
-                            file=file,
-                            idv=data[None][0],
-                            notas=data[None][1],
-                            ide=data[None][2],
-                            corral=data[None][3],
-                            dosis=data[None][4],
-                            lote=data[None][5],
-                            vencimiento_lote=data[None][6],
-                            fechafinal_pr=data[None][7],
-                            fechafinal_ise=data[None][8],
-                            fecha=data[None][9],
-                            hora=data[None][10]
-                        )
-                        trutests.append(trutest)
-                # Guardar los objetos Trutest en la base de datos
-                for trutest in trutests:
-                    trutest.save()
-                # Devolver una respuesta con los objetos creados
-                serializer = TrutestSerializer(trutests, many=True)
-                return Response(serializer.data)
-            else:
-                return Response({'error': 'El archivo debe ser formato CSV'})
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def create(self, request, *args, **kwargs):
+        file = request.FILES.get('file')
+        if not file:
+            return Response({'error': 'No file was uploaded.'}, status.HTTP_400_BAD_REQUEST)
+        CSVFile.objects.create(file=file)
+        return Response({'message': 'File uploaded successfully'}, status.HTTP_201_CREATED)
 
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        csv_file = instance.file
+        decoded_file = csv_file.read().decode('utf-8').splitlines()
+        data = []
+        for row in decoded_file:
+            data.append(row.split(';'))
+        return Response({'data': data}, status.HTTP_200_OK)
+
+
+class AnimalViewSet(viewsets.ModelViewSet):
+    queryset = Animal.objects.all()
+    serializer_class = TrutestSerializer
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.ide = request.data.get('ide', instance.ide)
+        instance.idv = request.data.get('idv', instance.idv)
+        instance.fecha = request.data.get('fecha', instance.fecha)
+        instance.hora = request.data.get('hora', instance.hora)
+        instance.fecha_nac = request.data.get('fecha_nac', instance.fecha_nac)
+        instance.raza = request.data.get('raza', instance.raza)
+        instance.ubicacion = request.data.get('ubicacion', instance.ubicacion)
+        instance.inscripta = request.data.get('inscripta', instance.inscripta)
+        instance.peso = request.data.get('peso', instance.peso)
+        instance.nota = request.data.get('nota', instance.nota)
+        instance.save()
+        serializer = self.serializer_class(instance)
+        return Response(serializer.data, status.HTTP_200_OK)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data, status.HTTP_200_OK)
 

@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Trutest
+from .models import Animal
 
-admin.site.register(Trutest)
+admin.site.register(Animal)

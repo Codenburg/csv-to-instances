@@ -48,7 +48,7 @@ export function TrutestFormPage() {
       if (params.id) {
         const { data } = await getTrutest(params.id);
         setValue("idv", data.idv);
-        setValue("notas", data.notas);
+        setValue("notas", data.nota);
       }
     }
     loadTrutest();

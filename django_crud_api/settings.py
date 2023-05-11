@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.admin", "django.contrib.auth",
     "django.contrib.contenttypes", "django.contrib.sessions",
     "django.contrib.messages", "django.contrib.staticfiles",
-    'whitenoise.runserver_nostatic', "corsheaders", "rest_framework",
+    'whitenoise.runserver_nostatic', "corsheaders", "rest_framework",'rest_framework.authtoken',
     "coreapi", "trutests"
 ]
 
@@ -132,13 +132,21 @@ CSRF_TRUSTED_ORIGINS = ["http://*"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000',
     'http://127.0.0.1:8000',
+    'http://localhost:8000',
     'http://localhost:5173',
 ]
 
-CORS_ORIGIN_WHITELIST = ['http://localhost:5173']
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:8000',
+]
+
 
 REST_FRAMEWORK = {
+
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
