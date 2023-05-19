@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { uploadTrutest } from "../api/trutests.api";
 import { toast } from "react-hot-toast";
+import { CsvTable } from "../components/CsvTable";
 
 export function UploadCsvPage() {
   const [file, setFile] = useState(null);
+  const [showTable, setShowTable] = useState(false); // Estado para mostrar la tabla
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -16,6 +18,7 @@ export function UploadCsvPage() {
         const formData = new FormData();
         formData.append("file", file);
         await uploadTrutest(formData);
+        setShowTable(true); // Mostrar la tabla después de cargar el archivo exitosamente
         toast.success("CSV file uploaded successfully!");
       } catch (error) {
         toast.error("Error uploading CSV file");
@@ -42,6 +45,9 @@ export function UploadCsvPage() {
           Upload
         </button>
       </form>
+
+      {/* Mostrar la tabla si el estado showTable es verdadero */}
+      {showTable && <CsvTable file={file} />}
     </div>
   );
 }
