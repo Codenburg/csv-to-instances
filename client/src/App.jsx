@@ -19,7 +19,6 @@ function App() {
           <Route path="/trutests/:id" element={<TrutestFormPage />} />
           <Route path="/trutests-create" element={<TrutestFormPage />} />
           <Route path="/trutests/form/" element={<UploadCsvPage />} />
-          <Route path="/trutests/form/:id" element={<CsvTable />} />
 
 
 

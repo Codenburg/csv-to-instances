@@ -24,7 +24,6 @@ export const updateTrutest = (id, trutest) =>
 
 export const deleteTrutest = (id) => TrutestsApi.delete(`/${id}`);
 
-export const uploadTrutest = async (file) => {
-  const response = await FileApi.post("/", file);
-  return response.data; // Retorna el resultado en formato JSON
-};
+export const uploadTrutest =  (file) =>  FileApi.post("/", file);
+
+

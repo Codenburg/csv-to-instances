@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {useParams} from 'react-router-dom'
+
+const readCsvFile = async (file, setTableData) => {
+  const fileReader = new FileReader();
+
+  fileReader.onload = (e) => {
+    const content = e.target.result;
+    const rows = content.split("\n");
+    const data = rows.map((row) => row.split(";"));
+    setTableData(data.slice(4));
+  };
+
+  fileReader.readAsText(file);
+};
 
 export const CsvTable = ({ file }) => {
   const [tableData, setTableData] = useState([]);
@@ -7,31 +19,28 @@ export const CsvTable = ({ file }) => {
   const itemsPerPage = 5;
 
   useEffect(() => {
-    const readCsvFile = async () => {
-      const fileReader = new FileReader();
-
-      fileReader.onload = (e) => {
-        const content = e.target.result;
-        const rows = content.split("\n");
-        const data = rows.map((row) => row.split(";"));
-        setTableData(data.slice(4));
-      };
-
-      fileReader.readAsText(file);
-    };
-
-    if (file) {
-      readCsvFile();
+    if (!file) {
+      return;
     }
+
+    readCsvFile(file, setTableData);
   }, [file]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [tableData]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = tableData.slice(indexOfFirstItem, indexOfLastItem);
 
-  const paginate = (pageNumber) => {
+  const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  if (!file) {
+    return <div>No file selected.</div>;
+  }
 
   return (
     <div className="mt-5">
@@ -49,10 +58,10 @@ export const CsvTable = ({ file }) => {
         </thead>
         <tbody>
           {currentItems.length > 0 ? (
-            currentItems.map((row, index) => (
-              <tr key={index}>
-                {row.map((cell, index) => (
-                  <td key={index} className="p-2 border">
+            currentItems.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <td key={`${rowIndex}-${cellIndex}`} className="p-2 border">
                     {cell}
                   </td>
                 ))}
@@ -74,7 +83,7 @@ export const CsvTable = ({ file }) => {
         <div className="flex justify-center mt-4">
           <button
             className="px-4 py-2 bg-gray-200 rounded-md mr-2"
-            onClick={() => paginate(currentPage - 1)}
+            onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 1}
           >
             Previous
@@ -82,7 +91,7 @@ export const CsvTable = ({ file }) => {
           <span className="font-bold">{currentPage}</span>
           <button
             className="px-4 py-2 bg-gray-200 rounded-md ml-2"
-            onClick={() => paginate(currentPage + 1)}
+            onClick={() => goToPage(currentPage + 1)}
             disabled={indexOfLastItem >= tableData.length}
           >
             Next
