@@ -4,7 +4,7 @@ import { TrutestFormPage } from "./pages/TrutestFormPage"
 import { TrutestsPage } from "./pages/TrustestsPage";
 import { Toaster } from "react-hot-toast";
 import { UploadCsvPage } from "./pages/UploadCsvForm";
-import { CsvTable } from "./components/CsvTable";
+
 ;
 
 function App() {

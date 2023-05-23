@@ -1,103 +1,84 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTable } from "react-table";
 
-const readCsvFile = async (file, setTableData) => {
-  const fileReader = new FileReader();
-
-  fileReader.onload = (e) => {
-    const content = e.target.result;
-    const rows = content.split("\n");
-    const data = rows.map((row) => row.split(";"));
-    setTableData(data.slice(4));
-  };
-
-  fileReader.readAsText(file);
-};
-
-export const CsvTable = ({ file }) => {
-  const [tableData, setTableData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+export function CsvTable({ file }) {
+  const [data, setData] = useState([]);
+  const [headers, setHeaders] = useState([]);
 
   useEffect(() => {
-    if (!file) {
-      return;
-    }
+    const reader = new FileReader();
 
-    readCsvFile(file, setTableData);
+    reader.onload = (e) => {
+      const contents = e.target.result;
+      const lines = contents.split("\n");
+      const csvData = [];
+
+      // Obtener los headers de las columnas
+      const csvHeaders = lines[4]
+        .split(";")
+        .map((header) => ({ Header: header.trim(), accessor: header.trim() }));
+      setHeaders(csvHeaders);
+
+      // Obtener los datos de las filas
+      for (let i = 5; i < lines.length; i++) {
+        const rowData = lines[i].split(";").map((value) => value.trim());
+        const rowObject = {};
+
+        for (let j = 0; j < csvHeaders.length; j++) {
+          const header = csvHeaders[j].accessor;
+          const value = rowData[j];
+          rowObject[header] = value;
+        }
+
+        csvData.push(rowObject);
+      }
+
+      setData(csvData);
+    };
+
+    reader.readAsText(file);
   }, [file]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [tableData]);
+  const columns = headers;
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = tableData.slice(indexOfFirstItem, indexOfLastItem);
-
-  const goToPage = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  if (!file) {
-    return <div>No file selected.</div>;
-  }
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data });
 
   return (
-    <div className="mt-5">
-      <h2 className="text-xl font-bold mb-4">CSV File Content:</h2>
-      <table className="table-auto">
+    <div className="mt-4">
+      <table {...getTableProps()} className="table-auto border-collapse">
         <thead>
-          <tr>
-            {tableData.length > 0 &&
-              tableData[0].map((header, index) => (
-                <th key={index} className="p-2 border">
-                  {header}
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th
+                  {...column.getHeaderProps()}
+                  className="px-4 py-2 bg-gray-200 text-gray-700 border"
+                >
+                  {column.render("Header")}
                 </th>
               ))}
-          </tr>
+            </tr>
+          ))}
         </thead>
-        <tbody>
-          {currentItems.length > 0 ? (
-            currentItems.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {row.map((cell, cellIndex) => (
-                  <td key={`${rowIndex}-${cellIndex}`} className="p-2 border">
-                    {cell}
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => (
+                  <td
+                    {...cell.getCellProps()}
+                    className="px-4 py-2 border text-white"
+                  >
+                    {cell.render("Cell")}
                   </td>
                 ))}
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td
-                colSpan={tableData.length > 0 ? tableData[0].length : 1}
-                className="p-2 border"
-              >
-                No data available for the selected page.
-              </td>
-            </tr>
-          )}
+            );
+          })}
         </tbody>
       </table>
-      {tableData.length > itemsPerPage && (
-        <div className="flex justify-center mt-4">
-          <button
-            className="px-4 py-2 bg-gray-200 rounded-md mr-2"
-            onClick={() => goToPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <span className="font-bold">{currentPage}</span>
-          <button
-            className="px-4 py-2 bg-gray-200 rounded-md ml-2"
-            onClick={() => goToPage(currentPage + 1)}
-            disabled={indexOfLastItem >= tableData.length}
-          >
-            Next
-          </button>
-        </div>
-      )}
     </div>
   );
-};
+}

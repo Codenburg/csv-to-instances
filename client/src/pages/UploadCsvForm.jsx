@@ -6,32 +6,34 @@ export function UploadCsvPage() {
   const [file, setFile] = useState(null);
   const [showTable, setShowTable] = useState(false); // Estado para mostrar la tabla
 
-const handleFileChange = (e) => {
-  const selectedFile = e.target.files[0];
-  if (selectedFile && selectedFile.name.endsWith(".csv")) {
-    setFile(selectedFile);
-  } else {
-    setFile(null);
-    toast.error("Please select a valid CSV file");
-  }
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  if (file) {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      setShowTable(true);
-      toast.success("CSV file uploaded successfully!");
-    } catch (error) {
-      console.error(error);
-      toast.error("Error uploading CSV file. Please try again.");
+  // Maneja el cambio de archivo
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile && selectedFile.name.endsWith(".csv")) {
+      setFile(selectedFile);
+    } else {
+      setFile(null);
+      toast.error("Please select a valid CSV file");
     }
-  }
-};
+  };
 
+  // Maneja el envío del formulario
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (file) {
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        setShowTable(true);
+        toast.success("CSV file uploaded successfully!");
+      } catch (error) {
+        console.error(error);
+        toast.error("Error uploading CSV file. Please try again.");
+      }
+    }
+  };
 
+  // Maneja la acción de ver la tabla en otra página
   const handleViewTable = () => {
     setShowTable(true);
     setFile(null);
@@ -56,15 +58,15 @@ const handleSubmit = (e) => {
           type="submit"
           className="bg-indigo-500 p-3 rounded-lg block w-full mt-3"
         >
-          Ver animales
+          VER ANIMALES
         </button>
         {showTable && (
           <button
             type="button"
-            className="bg-indigo-500 p-3 rounded-lg block w-full mt-3"
+            className="bg-red-600 p-3 rounded-lg block w-full mt-3"
             onClick={handleViewTable}
           >
-            Ver en otra pagina
+            CREAR ANIMALES
           </button>
         )}
       </form>
