@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useTable } from "react-table";
+import { useTable, usePagination } from "react-table";
 
 export function CsvTable({ file }) {
   const [data, setData] = useState([]);
@@ -41,8 +41,24 @@ export function CsvTable({ file }) {
 
   const columns = headers;
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    prepareRow,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    state: { pageIndex },
+  } = useTable(
+    { columns, data, initialState: { pageIndex: 0, pageSize: 10 } },
+    usePagination
+  );
 
   return (
     <div className="mt-4">
@@ -62,7 +78,7 @@ export function CsvTable({ file }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -79,6 +95,41 @@ export function CsvTable({ file }) {
           })}
         </tbody>
       </table>
+      <div className="flex items-center justify-center space-x-2">
+        <button
+          onClick={() => gotoPage(0)}
+          disabled={!canPreviousPage}
+          className="px-3 py-1 text-blue-500 hover:text-blue-700 rounded-lg"
+        >
+          {"<<"}
+        </button>
+        <button
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+          className="px-3 py-1 text-blue-500 hover:text-blue-700 rounded-lg"
+        >
+          {"<"}
+        </button>
+        <span>
+          <strong className="px-3 py-1 text-blue-500 hover:text-blue-700 rounded-lg">
+            {pageIndex + 1} de {pageOptions.length}
+          </strong>
+        </span>
+        <button
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+          className="px-3 py-1 text-blue-500 hover:text-blue-700 rounded-lg"
+        >
+          {">"}
+        </button>
+        <button
+          onClick={() => gotoPage(pageCount - 1)}
+          disabled={!canNextPage}
+          className="px-3 py-1 text-blue-500 hover:text-blue-700 rounded-lg"
+        >
+          {">>"}
+        </button>
+      </div>
     </div>
   );
 }
