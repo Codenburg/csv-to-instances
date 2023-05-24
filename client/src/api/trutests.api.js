@@ -24,6 +24,8 @@ export const updateTrutest = (id, trutest) =>
 
 export const deleteTrutest = (id) => TrutestsApi.delete(`/${id}`);
 
-export const uploadTrutest =  (file) =>  FileApi.post("/", file);
-
-
+export const uploadTrutest = (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  return FileApi.post("/", formData);
+};

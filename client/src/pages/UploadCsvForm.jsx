@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { CsvTable } from "../components/CsvTable";
+import { uploadTrutest, createTrutest } from "../api/trutests.api";
 
 export function UploadCsvPage() {
   const [file, setFile] = useState(null);
@@ -33,10 +34,18 @@ export function UploadCsvPage() {
     }
   };
 
-  // Maneja la acción de ver la tabla en otra página
-  const handleViewTable = () => {
-    setShowTable(true);
-    setFile(null);
+  // Maneja la acción de crear animales
+  const handleCreateAnimals = () => {
+    if (file) {
+      try {
+        uploadTrutest(file);
+        createTrutest(file)
+        toast.success("Animals created successfully!");
+      } catch (error) {
+        console.error(error);
+        toast.error("Error creating animals. Please try again.");
+      }
+    }
   };
 
   return (
@@ -64,7 +73,7 @@ export function UploadCsvPage() {
           <button
             type="button"
             className="bg-red-600 p-3 rounded-lg block w-full mt-3"
-            onClick={handleViewTable}
+            onClick={handleCreateAnimals}
           >
             CREAR ANIMALES
           </button>
