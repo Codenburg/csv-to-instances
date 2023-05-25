@@ -47,7 +47,15 @@ export function TrutestFormPage() {
     async function loadTrutest() {
       if (params.id) {
         const { data } = await getTrutest(params.id);
+        setValue("ide", data.ide);
         setValue("idv", data.idv);
+        setValue("fecha_de_nac", data.fecha_de_nac);
+        setValue("raza", data.raza);
+        setValue("ubicacion", data.ubicacion);
+        setValue("inscripta", data.inscripta);
+        setValue("peso", data.peso);
+        setValue("fecha", data.fecha);
+        setValue("hora", data.hora);
         setValue("notas", data.nota);
       }
     }
@@ -59,21 +67,66 @@ export function TrutestFormPage() {
       <form onSubmit={onSubmit} className="bg-zinc-800 p-10 rounded-lg mt-2">
         <input
           type="text"
-          placeholder="Idv"
+          placeholder="IDE"
+          {...register("ide", { required: true })}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+          autoFocus
+        />
+        {errors.ide && <span>This field is required</span>}
+
+        <input
+          type="text"
+          placeholder="IDV"
           {...register("idv", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
           autoFocus
         />
-
         {errors.idv && <span>This field is required</span>}
+
+        <input
+          type="text"
+          placeholder="Fecha de nacimiento"
+          {...register("fecha_de_nac")}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+          autoFocus
+        />
+        <input
+          type="text"
+          placeholder="Raza"
+          {...register("raza")}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+          autoFocus
+        />
+        <input
+          type="text"
+          placeholder="Ubicacion"
+          {...register("ubicacion")}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+          autoFocus
+        />
+
+        <input
+          type="text"
+          placeholder="Peso"
+          {...register("peso")}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+          autoFocus
+        />
+
+        <input
+          type="text"
+          placeholder="fecha"
+          {...register("fecha")}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+          autoFocus
+        />
+        {errors.fecha && <span>This field is required</span>}
 
         <textarea
           placeholder="Notas"
-          {...register("notas", { required: true })}
+          {...register("notas")}
           className="bg-zinc-700 p-3 rounded-lg block w-full"
         />
-
-        {errors.notas && <span>This field is required</span>}
 
         <button className="bg-indigo-500 p-3 rounded-lg block w-full mt-3">
           Save

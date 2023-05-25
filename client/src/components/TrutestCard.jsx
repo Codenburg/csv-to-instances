@@ -11,9 +11,9 @@ export function TrutestCard({ trutest }) {
       }}
     >
       <h1 className="text-white font-bold uppercase rounded-lg">
-        {trutest.idv}
+        IDE: {trutest.ide}
       </h1>
-      <p className="text-slate-400">{trutest.nota}</p>
+      <p className="text-slate-400">IDV: {trutest.idv}</p>
     </div>
   );
 }

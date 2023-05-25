@@ -13,7 +13,7 @@ class TrutestView(viewsets.ModelViewSet):
     queryset = Animal.objects.all()
 
     def create(self, request, *args, **kwargs):
-        latest_file = CSVFile.objects.latest('id')
+        latest_file = CSVFile.objects.latest('id') #cuando quiero crear una sola se crean todas las que estan en el ultimo archivo
         csv_file = latest_file.file
         decoded_file = csv_file.read().decode('ISO-8859-1').splitlines()
         # Buscar los índices de las columnas que nos interesan
