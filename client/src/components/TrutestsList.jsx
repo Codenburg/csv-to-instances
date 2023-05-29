@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllTrutests } from "../api/trutests.api";
-import { TrutestCard } from "./TrutestCard";
+import {Table} from './Table'
 
 export function TrutestsList() {
   const [trutests, setTrutests] = useState([]);
@@ -14,10 +14,10 @@ export function TrutestsList() {
   }, []);
 
   return (
-    <div className="grid grid-cols-3 gap-3">
-      {trutests.map((trutest) => (
-        <TrutestCard key={trutest.id} trutest={trutest} />
-      ))}
+   
+    <div>
+      <Table data={trutests}/>
+
     </div>
   );
 }

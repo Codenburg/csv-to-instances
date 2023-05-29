@@ -8,11 +8,11 @@ export function Navigation() {
       </Link>
       
       <button className="bg-indigo-500 p-3 rounded-lg">
-        <Link to="/trutests-create">Create Trutest</Link>
+        <Link to="/trutests-create">Crear Animal</Link>
       </button>
 
       <button className="bg-indigo-500 p-3 rounded-lg">
-        <Link to="/trutests/form">Upload Trutest</Link>
+        <Link to="/trutests/form">Subir Trutest</Link>
       </button>
     </div>
   );
