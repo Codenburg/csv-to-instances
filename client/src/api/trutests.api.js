@@ -13,6 +13,10 @@ const FileApi = axios.create({
   baseURL: `${URL}/trutests/api/v1/file`,
 });
 
+const AnimalApi = axios.create({
+  baseURL: `${URL}/trutests/api/v1/animal`,
+});
+
 export const getAllTrutests = () => TrutestsApi.get("/");
 
 export const getTrutest = (id) => TrutestsApi.get(`/${id}`);
@@ -29,3 +33,5 @@ export const uploadTrutest = (file) => {
   formData.append("file", file);
   return FileApi.post("/", formData);
 };
+
+export const createAnimal = (animal) => AnimalApi.post("/", animal);
