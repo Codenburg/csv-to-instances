@@ -18,7 +18,7 @@ function App() {
           <Route path="/trutests" element={<TrutestsPage />} />
           <Route path="/trutests/:id" element={<TrutestFormPage />} />
           <Route path="/trutests-create" element={<TrutestFormPage />} />
-          <Route path="/trutests/form/" element={<UploadCsvPage />} />
+          <Route path="/trutests-upload" element={<UploadCsvPage />} />
 
 
 

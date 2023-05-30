@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useTable, usePagination } from "react-table";
 
 export function CsvTable({ file }) {
@@ -13,13 +13,20 @@ export function CsvTable({ file }) {
       const lines = contents.split("\n");
       const csvData = [];
 
-      // Obtener los headers de las columnas
+      // Obtener los headers de las columnas en la línea 5
       const csvHeaders = lines[4]
-        .split(";")
-        .map((header) => ({ Header: header.trim(), accessor: header.trim() }));
-      setHeaders(csvHeaders);
+      .split(";")
+      .map((header) => {
+        const trimmedHeader = header.trim().replace(".", "");
+        return {
+          Header: trimmedHeader,
+          accessor: trimmedHeader
+        };
+      });
+    setHeaders(csvHeaders);
+    
 
-      // Obtener los datos de las filas
+      // Obtener los datos de las filas (omitir las primeras 4 líneas)
       for (let i = 5; i < lines.length; i++) {
         const rowData = lines[i].split(";").map((value) => value.trim());
         const rowObject = {};
@@ -39,7 +46,7 @@ export function CsvTable({ file }) {
     reader.readAsText(file);
   }, [file]);
 
-  const columns = headers;
+  const columns = useMemo(() => headers, [headers]);
 
   const {
     getTableProps,
@@ -62,7 +69,7 @@ export function CsvTable({ file }) {
 
   return (
     <div className="mt-4">
-      <table {...getTableProps()} className="table-auto border-collapse">
+      <table {...getTableProps()} className="w-full overflow-x-auto">
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -83,10 +90,7 @@ export function CsvTable({ file }) {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => (
-                  <td
-                    {...cell.getCellProps()}
-                    className="px-4 py-2 border text-white"
-                  >
+                  <td {...cell.getCellProps()} className="px-4 py-2 border">
                     {cell.render("Cell")}
                   </td>
                 ))}
@@ -95,7 +99,7 @@ export function CsvTable({ file }) {
           })}
         </tbody>
       </table>
-      <div className="flex items-center justify-center space-x-2">
+      <div className="flex items-center justify-center space-x-2 mt-4">
         <button
           onClick={() => gotoPage(0)}
           disabled={!canPreviousPage}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllTrutests } from "../api/trutests.api";
-import {Table} from './Table'
+import { Table } from "./Table";
 
 export function TrutestsList() {
   const [trutests, setTrutests] = useState([]);
@@ -14,10 +14,8 @@ export function TrutestsList() {
   }, []);
 
   return (
-   
     <div>
-      <Table data={trutests}/>
-
+      <Table data={trutests} />
     </div>
   );
 }
