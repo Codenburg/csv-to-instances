@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { CsvTable } from "../components/CsvTable";
 import { uploadTrutest, createTrutest } from "../api/trutests.api";
 import { useNavigate } from "react-router-dom";
+
 export function UploadCsvPage() {
   const [file, setFile] = useState(null);
   const [showTable, setShowTable] = useState(false); // Estado para mostrar la tabla
@@ -28,7 +29,6 @@ export function UploadCsvPage() {
         setShowTable(true);
         toast.success("CSV file uploaded successfully!");
       } catch (error) {
-        console.error(error);
         toast.error("Error uploading CSV file. Please try again.");
       }
     }
@@ -43,7 +43,6 @@ export function UploadCsvPage() {
         toast.success("Animals created successfully!");
         navigate("/trutests");
       } catch (error) {
-        console.error(error);
         toast.error("Error creating animals. Please try again.");
       }
     }
@@ -56,7 +55,7 @@ export function UploadCsvPage() {
         className="bg-zinc-800 p-10 rounded-lg mt-2"
       >
         <div className="mt-3">
-          <label htmlFor="csvFile">Upload CSV File:</label>
+          <label htmlFor="csvFile">Subir Tru-Test </label>
           <input
             type="file"
             id="csvFile"

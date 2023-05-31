@@ -13,4 +13,5 @@ export function TrutestCard({ trutest }) {
       <h1 className="text-white font-bold uppercase rounded-lg">{trutest.ide}</h1>
     </div>
   );
+  
 }
