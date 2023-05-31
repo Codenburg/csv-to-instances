@@ -1,10 +1,6 @@
-from rest_framework import status
 from rest_framework.response import Response
 from .serializer import TrutestSerializer, CSVFileSerializer
-from .models import Animal, CSVFile
 from rest_framework import status, viewsets
-from rest_framework.response import Response
-from .serializer import TrutestSerializer
 from .models import Animal, CSVFile
 
 
@@ -19,8 +15,10 @@ class TrutestView(viewsets.ModelViewSet):
 
         header_row = decoded_file[4]
         header_fields = header_row.split(';')
-        field_names = ['IDE', 'IDV', 'FECHA NAC.', 'RAZA', 'UBICACION', 'INSCRIPTA', 'PESO', 'Fecha', 'Hora']
-        field_indexes = {field_name: header_fields.index(field_name) for field_name in field_names}
+        field_names = ['IDE', 'IDV', 'FECHA NAC.', 'RAZA',
+                       'UBICACION', 'INSCRIPTA', 'PESO', 'Fecha', 'Hora']
+        field_indexes = {field_name: header_fields.index(
+            field_name) for field_name in field_names}
 
         created_animals = []
 
@@ -54,7 +52,6 @@ class TrutestView(viewsets.ModelViewSet):
 
         serializer = self.serializer_class(created_animals, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 
 class CSVFileView(viewsets.ModelViewSet):

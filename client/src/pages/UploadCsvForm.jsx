@@ -35,11 +35,11 @@ export function UploadCsvPage() {
   };
 
   // Maneja la acción de crear animales
-  const handleCreateAnimals = () => {
+  const handleCreateAnimals = async () => {
     if (file) {
       try {
-        uploadTrutest(file);
-        createTrutest(file);
+        await uploadTrutest(file);
+        await createTrutest(file);
         toast.success("Animals created successfully!");
         navigate("/trutests");
       } catch (error) {
@@ -55,7 +55,7 @@ export function UploadCsvPage() {
         className="bg-zinc-800 p-10 rounded-lg mt-2"
       >
         <div className="mt-3">
-          <label htmlFor="csvFile">Subir Tru-Test </label>
+          <label htmlFor="csvFile">TRU-TEST: </label>
           <input
             type="file"
             id="csvFile"

@@ -22,8 +22,8 @@ INSTALLED_APPS = [
     "django.contrib.admin", "django.contrib.auth",
     "django.contrib.contenttypes", "django.contrib.sessions",
     "django.contrib.messages", "django.contrib.staticfiles",
-    'whitenoise.runserver_nostatic', "corsheaders", "rest_framework",'rest_framework.authtoken',
-    "coreapi", "trutests"
+    'whitenoise.runserver_nostatic', "corsheaders", "rest_framework", 'rest_framework.authtoken',
+    "coreapi", "trutests", "account",
 ]
 
 MIDDLEWARE = [
@@ -38,7 +38,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "django_crud_api.urls"
+ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
@@ -57,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "django_crud_api.wsgi.application"
+WSGI_APPLICATION = "core.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -120,8 +120,8 @@ MEDIA_URL = '/media/'
 
 
 STATICFILES_DIRS = [
-  # Tell Django where to look for React's static files (css, js)
-  os.path.join(BASE_DIR, "client", "dist")
+    # Tell Django where to look for React's static files (css, js)
+    os.path.join(BASE_DIR, "client", "dist")
 ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 CSRF_TRUSTED_ORIGINS = ["http://*"]
