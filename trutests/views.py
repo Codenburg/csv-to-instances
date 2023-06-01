@@ -2,11 +2,13 @@ from rest_framework.response import Response
 from .serializer import TrutestSerializer, CSVFileSerializer
 from rest_framework import status, viewsets
 from .models import Animal, CSVFile
+from rest_framework.permissions import IsAuthenticated
 
 
 class TrutestView(viewsets.ModelViewSet):
     serializer_class = TrutestSerializer
     queryset = Animal.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         latest_file = CSVFile.objects.latest('id')
