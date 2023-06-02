@@ -10,7 +10,6 @@ import { MainWrapper } from "../src/layouts/MainWrapper";
 import { PrivateRoute } from "../src/layouts/PrivateRoute";
 import { Login } from "../src/pages/Login";
 import { Logout } from "../src/pages/Logout";
-import { Private } from "../src/pages/Private";
 
 function App() {
   return (
@@ -19,21 +18,13 @@ function App() {
         <MainWrapper>
           <Navigation />
           <Routes>
-            <Route
-              path="/private"
-              element={
-                <PrivateRoute>
-                  <Private/>
-                </PrivateRoute>
-              }
-            />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/trutests" element={<TrutestsPage />} />
-            <Route path="/trutests/:id" element={<AnimalCard />} />
-            <Route path="/trutests-create" element={<TrutestFormPage />} />
-            <Route path="/trutests-upload" element={<UploadCsvPage />} />
+            <Route path="/trutests" element={<PrivateRoute> <TrutestsPage/></PrivateRoute>} />
+            <Route path="/trutests/:id" element={<PrivateRoute><AnimalCard /></PrivateRoute>} />
+            <Route path="/trutests-create" element={<PrivateRoute><TrutestFormPage /></PrivateRoute>} />
+            <Route path="/trutests-upload" element={<PrivateRoute><UploadCsvPage /></PrivateRoute>} />
           </Routes>
           <Toaster />
         </MainWrapper>
