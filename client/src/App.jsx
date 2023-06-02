@@ -10,7 +10,7 @@ import { MainWrapper } from "../src/layouts/MainWrapper";
 import { PrivateRoute } from "../src/layouts/PrivateRoute";
 import { Login } from "../src/pages/Login";
 import { Logout } from "../src/pages/Logout";
-import {Private} from '../src/pages/Private'
+import { Private } from "../src/pages/Private";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
               path="/private"
               element={
                 <PrivateRoute>
-                  <Private />
+                  <Private/>
                 </PrivateRoute>
               }
             />

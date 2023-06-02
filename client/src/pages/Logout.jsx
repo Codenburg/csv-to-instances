@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { LoggedOutView } from "./home";
+import { LoggedOutView } from "../pages/Home";
 import { logout } from "../utils/auth";
 
 export const Logout = () => {

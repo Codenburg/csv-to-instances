@@ -8,7 +8,7 @@ export const Private = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.get('/test/');
+                const response = await api.get('account/test/');
                 setRes(response.data.response);
             } catch (error) {
                 setPostRes(error.response.data);
@@ -19,7 +19,7 @@ export const Private = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await api.post('/test/', {
+            const response = await api.post('account/test/', {
                 text: e.target[0].value,
             });
             setPostRes(response.data.response);
