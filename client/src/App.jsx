@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import { TrutestFormPage } from "./pages/TrutestFormPage";
 import { TrutestsPage } from "./pages/TrustestsPage";
-import { Home } from "./pages/Home";
 import { Toaster } from "react-hot-toast";
 import { UploadCsvPage } from "./pages/UploadCsvForm";
 import { AnimalCard } from "./components/AnimalCard";
@@ -18,10 +17,9 @@ function App() {
         <MainWrapper>
           <Navigation />
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/trutests" element={<PrivateRoute> <TrutestsPage/></PrivateRoute>} />
+            <Route path="/" element={<PrivateRoute> <TrutestsPage/></PrivateRoute>} />
             <Route path="/trutests/:id" element={<PrivateRoute><AnimalCard /></PrivateRoute>} />
             <Route path="/trutests-create" element={<PrivateRoute><TrutestFormPage /></PrivateRoute>} />
             <Route path="/trutests-upload" element={<PrivateRoute><UploadCsvPage /></PrivateRoute>} />

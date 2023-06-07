@@ -1,11 +1,14 @@
 import { useEffect } from "react";
-import { LoggedOutView } from "../pages/Home";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../utils/auth";
 
 export const Logout = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     logout();
-  }, []);
-  return <LoggedOutView title="You have been logged out" />;
-};
+    navigate("/login");
+  }, [navigate]);
 
+  return;
+};
