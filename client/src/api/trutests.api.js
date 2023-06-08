@@ -1,4 +1,3 @@
-import axios from "axios";
 import useAxios from "../utils/useAxios";
 
 const URL =
@@ -6,32 +5,36 @@ const URL =
     ? import.meta.env.VITE_BACKEND_URL
     : "http://localhost:8000";
 
-const TrutestsApi = useAxios();
+// Importaciones relacionadas con Trutests
 const trutestsUrl = `${URL}/trutests/api/v1/trutests`;
+const TrutestsApi = useAxios();
+const TrutestsInstance = TrutestsApi.create();
 
-const FileApi = axios.create({
-  baseURL: `${URL}/trutests/api/v1/file`,
-});
+// Importaciones relacionadas con Files
+const fileUrl = `${URL}/trutests/api/v1/file`;
+const FileApi = useAxios();
+const FileInstance = FileApi.create();
 
-const AnimalApi = axios.create({
-  baseURL: `${URL}/trutests/api/v1/animal`,
-});
+// Importaciones relacionadas con Animals
+const animalUrl = `${URL}/trutests/api/v1/animal`;
+const AnimalApi = useAxios();
+const AnimalInstance = AnimalApi.create();
 
-export const getAllTrutests = () => TrutestsApi.get(trutestsUrl);
-
-export const getTrutest = (id) => TrutestsApi.get(`/${id}`);
-
-export const createTrutest = (trutest) => TrutestsApi.post(trutestsUrl+'/', trutest);
-
+// Funciones de la API
+export const getAllTrutests = () => TrutestsInstance.get(trutestsUrl);
+export const getTrutest = (id) => TrutestsInstance.get(`${trutestsUrl}/${id}`);
+export const createTrutest = (trutest) =>
+  TrutestsInstance.post(trutestsUrl + "/", trutest);
 export const updateTrutest = (id, trutest) =>
-  TrutestsApi.put(`/${id}/`, trutest);
-
-export const deleteTrutest = (id) => TrutestsApi.delete(`/${id}`);
+  TrutestsInstance.put(`${trutestsUrl}/${id}/`, trutest);
+export const deleteTrutest = (id) =>
+  TrutestsInstance.delete(`${trutestsUrl}/${id}`);
 
 export const uploadTrutest = (file) => {
   const formData = new FormData();
   formData.append("file", file);
-  return FileApi.post("/", formData);
+  return FileInstance.post(fileUrl + "/", formData);
 };
 
-export const createAnimal = (animal) => AnimalApi.post("/", animal);
+export const createAnimal = (animal) =>
+  AnimalInstance.post(animalUrl + "/", animal);

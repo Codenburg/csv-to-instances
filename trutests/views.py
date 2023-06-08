@@ -59,6 +59,7 @@ class TrutestView(viewsets.ModelViewSet):
 class CSVFileView(viewsets.ModelViewSet):
     queryset = CSVFile.objects.all()
     serializer_class = CSVFileSerializer
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         file = request.FILES.get('file')
@@ -70,6 +71,7 @@ class CSVFileView(viewsets.ModelViewSet):
 
 class CreateAnimalView(viewsets.ModelViewSet):
     serializer_class = TrutestSerializer
+    permission_classes = [IsAuthenticated]
     queryset = Animal.objects.none()  # No utilizar queryset en la creación individual
 
     def create(self, request, *args, **kwargs):

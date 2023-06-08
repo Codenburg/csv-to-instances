@@ -39,7 +39,7 @@ export function TrutestFormPage() {
       });
     }
 
-    navigate("/trutests");
+    navigate("/");
   });
 
   useEffect(() => {
