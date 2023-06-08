@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   createAnimal,
-  deleteTrutest,
   getTrutest,
   updateTrutest,
 } from "../api/trutests.api";
@@ -150,30 +149,6 @@ export function TrutestFormPage() {
           Save
         </button>
       </form>
-
-      {params.id && (
-        <div className="flex justify-end">
-          <button
-            className="bg-red-500 p-3 rounded-lg w-48 mt-3"
-            onClick={async () => {
-              const accepted = window.confirm("Are you sure?");
-              if (accepted) {
-                await deleteTrutest(params.id);
-                toast.success("Trutest Removed", {
-                  position: "bottom-right",
-                  style: {
-                    background: "#101010",
-                    color: "#fff",
-                  },
-                });
-                navigate("/trutests");
-              }
-            }}
-          >
-            delete
-          </button>
-        </div>
-      )}
     </div>
   );
 }
