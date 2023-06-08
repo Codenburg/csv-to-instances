@@ -1,13 +1,13 @@
 import axios from "axios";
+import useAxios from "../utils/useAxios";
 
 const URL =
   process.env.NODE_ENV === "production"
     ? import.meta.env.VITE_BACKEND_URL
     : "http://localhost:8000";
 
-const TrutestsApi = axios.create({
-  baseURL: `${URL}/trutests/api/v1/trutests`,
-});
+const TrutestsApi = useAxios();
+const trutestsUrl = `${URL}/trutests/api/v1/trutests`;
 
 const FileApi = axios.create({
   baseURL: `${URL}/trutests/api/v1/file`,
@@ -17,11 +17,11 @@ const AnimalApi = axios.create({
   baseURL: `${URL}/trutests/api/v1/animal`,
 });
 
-export const getAllTrutests = () => TrutestsApi.get("/");
+export const getAllTrutests = () => TrutestsApi.get(trutestsUrl);
 
 export const getTrutest = (id) => TrutestsApi.get(`/${id}`);
 
-export const createTrutest = (trutest) => TrutestsApi.post("/", trutest);
+export const createTrutest = (trutest) => TrutestsApi.post(trutestsUrl+'/', trutest);
 
 export const updateTrutest = (id, trutest) =>
   TrutestsApi.put(`/${id}/`, trutest);

@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 class TrutestView(viewsets.ModelViewSet):
     serializer_class = TrutestSerializer
     queryset = Animal.objects.all()
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         latest_file = CSVFile.objects.latest('id')

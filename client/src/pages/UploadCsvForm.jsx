@@ -41,7 +41,7 @@ export function UploadCsvPage() {
         await uploadTrutest(file);
         await createTrutest(file);
         toast.success("Animals created successfully!");
-        navigate("/trutests");
+        navigate("/");
       } catch (error) {
         toast.error("Error creating animals. Please try again.");
       }
