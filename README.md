@@ -1,6 +1,6 @@
-# Django + Vite CRUD reading file CSV
+# Django React CRUD
 
-Create instances of animals based on the csv file and view them.
+This is a simple Django React CRUD application.
 
 # Environment variables
 

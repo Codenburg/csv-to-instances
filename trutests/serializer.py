@@ -1,13 +1,11 @@
 from rest_framework import serializers
-from .models import Animal,CSVFile
+from .models import Trutest
 
 class TrutestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Animal
+        model = Trutest
         fields = '__all__'
 
-
-class CSVFileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CSVFile
-        fields = '__all__'
+class FileSerializer(serializers.Serializer):
+    file = serializers.FileField()
+    

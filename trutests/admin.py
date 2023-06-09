@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Animal,CSVFile
+from .models import Trutest
 
-admin.site.register(Animal)
-admin.site.register(CSVFile)
+admin.site.register(Trutest)

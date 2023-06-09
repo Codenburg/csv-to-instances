@@ -10,8 +10,10 @@ export function TrutestCard({ trutest }) {
         navigate(`/trutests/${trutest.id}`);
       }}
     >
-      <h1 className="text-white font-bold uppercase rounded-lg">{trutest.ide}</h1>
+      <h1 className="text-white font-bold uppercase rounded-lg">
+        {trutest.idv}
+      </h1>
+      <p className="text-slate-400">{trutest.notas}</p>
     </div>
   );
-  
 }

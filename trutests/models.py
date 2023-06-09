@@ -1,28 +1,16 @@
 from django.db import models
 
-
-class Animal(models.Model):
-    ide = models.CharField(max_length=100)
-    idv = models.CharField(max_length=100)
-    fecha = models.CharField(max_length=100, blank=True, null=True)
-    hora = models.CharField(max_length=100, blank=True, null=True)
-    fecha_de_nac = models.CharField(max_length=100, blank=True, null=True)
-    raza = models.CharField(max_length=100, blank=True, null=True)
-    ubicacion = models.CharField(max_length=100, blank=True, null=True)
-    inscripta = models.CharField(max_length=100, blank=True, null=True)
-    peso = models.FloatField(blank=True, null=True)
-    nota = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        verbose_name_plural = "Animales"
-
-    def __str__(self):
-        return self.ide
-
-
-class CSVFile(models.Model):
+class Trutest(models.Model):
     file = models.FileField(upload_to='files/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.file.name
+    idv = models.CharField(max_length=100, blank=True)#caravana visual
+    peso = models.CharField(max_length=100, blank=True)#if file num is equal to 'peso' save him
+    notas = models.CharField(max_length=100, blank=True)
+    ide = models.CharField(max_length=100, blank=True)#caravana electronicas
+    corral= models.CharField(max_length=100, blank=True)
+    dosis= models.CharField(max_length=100, blank=True)
+    lote= models.CharField(max_length=100, blank=True)
+    vencimiento_lote= models.CharField(max_length=100, blank=True)
+    fechafinal_pr= models.CharField(max_length=100, blank=True)
+    fechafinal_ise= models.CharField(max_length=100, blank=True)
+    fecha = models.CharField(max_length=100, blank=True)
+    hora = models.CharField(max_length=100, blank=True)
