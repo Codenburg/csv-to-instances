@@ -2,7 +2,8 @@ db.sqlite3
 venv
 __pycache__
 staticfiles/
-
+../media/files
 # environment variables
 .env.local
 .env.production
+idea.txt

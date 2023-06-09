@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  background-color: #202020;
+  background: linear-gradient(to right, rgb(17, 24, 39), rgb(25, 33, 49));
   color: aliceblue;
 }
