@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getRefreshToken, isAccessTokenExpired, setAuthUser } from "./auth";
-import { API_BASE_URL } from "./constants";
+import { getRefreshToken, isAccessTokenExpired, setAuthUser } from "../auth";
+import { API_BASE_URL } from "../constants";
 import Cookies from "js-cookie";
 
 const createAxiosInstance = (accessToken) => {
@@ -23,7 +23,7 @@ const useAxios = () => {
     try {
       const response = await getRefreshToken(refreshToken);
       setAuthUser(response.access, response.refresh);
-      config.headers.Authorization = `Bearer ${response.data.access}`;
+      config.headers.Authorization = `Bearer ${response.access}`;
     } catch (error) {
       // Manejar errores al obtener un nuevo token de acceso
       console.error("Error al obtener el token de acceso:", error);

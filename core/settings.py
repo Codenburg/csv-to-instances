@@ -23,8 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.admin", "django.contrib.auth",
     "django.contrib.contenttypes", "django.contrib.sessions",
     "django.contrib.messages", "django.contrib.staticfiles",
-    'whitenoise.runserver_nostatic', "corsheaders", "rest_framework",
-    'rest_framework.authtoken', 'rest_framework_simplejwt.token_blacklist',
+    'whitenoise.runserver_nostatic', "corsheaders", "rest_framework", 'rest_framework_simplejwt.token_blacklist',
     "coreapi", "trutests", "account",
 ]
 
@@ -163,8 +162,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,

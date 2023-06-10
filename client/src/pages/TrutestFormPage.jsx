@@ -5,7 +5,7 @@ import {
   createAnimal,
   getTrutest,
   updateTrutest,
-} from "../api/trutests.api";
+} from "../utils/api/trutests.api";
 import { toast } from "react-hot-toast";
 
 export function TrutestFormPage() {
