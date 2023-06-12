@@ -1,1 +1,0 @@
-subir el archivo csv,verlo formateado en tablas. Que se pueda editar y guardarlo en apartado llamado resumenes de trustest o Trutests

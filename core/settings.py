@@ -19,13 +19,30 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
-INSTALLED_APPS = [
-    "django.contrib.admin", "django.contrib.auth",
-    "django.contrib.contenttypes", "django.contrib.sessions",
-    "django.contrib.messages", "django.contrib.staticfiles",
-    'whitenoise.runserver_nostatic', "corsheaders", "rest_framework", 'rest_framework_simplejwt.token_blacklist',
-    "coreapi", "trutests", "account",
+DJANGO_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    'whitenoise.runserver_nostatic',
 ]
+
+THIRD_PARTY_APPS = [
+    "corsheaders",
+    "rest_framework",
+    'rest_framework_simplejwt.token_blacklist',
+    "coreapi",
+]
+
+PROJECTS_APPS = [
+    "apps.trutests",
+    "apps.account",
+]
+
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECTS_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -154,11 +171,11 @@ CORS_ORIGIN_WHITELIST = [
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    
+
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    
+
 }
 
 SIMPLE_JWT = {
