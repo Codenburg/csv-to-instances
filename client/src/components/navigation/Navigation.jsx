@@ -1,7 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../store/auth";
 import { Logout } from "../../pages/Logout";
+
+const DropdownItem = ({ to, label, onClick }) => (
+  <Link
+    to={to}
+    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+    onClick={onClick}
+  >
+    {label}
+  </Link>
+);
+
+const NavDropdown = ({ label, items }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const closeDropdownOnOutsideClick = (event) => {
+      if (!event.target.closest(".nav-dropdown")) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener("click", closeDropdownOnOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", closeDropdownOnOutsideClick);
+    };
+  }, []);
+
+  return (
+    <div className="relative inline-block text-left nav-dropdown">
+      <button
+        className="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 focus:outline-none"
+        onClick={toggleDropdown}
+      >
+        {label}
+      </button>
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+          {items.map((item, index) => (
+            <DropdownItem
+              key={index}
+              {...item}
+              onClick={() => {
+                item.onClick && item.onClick();
+                closeDropdown();
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export function Navigation() {
   const [isLoggedIn, user] = useAuthStore((state) => [
@@ -9,51 +70,83 @@ export function Navigation() {
     state.user,
   ]);
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
   return (
     <div>
       {isLoggedIn() && (
-        <div className="flex justify-between py-3 items-center">
-          <Link to="/">
-            <h1 className="font-bold text-3xl mb-4">Trutests App</h1>
-          </Link>
-
-          <button className="bg-indigo-500 p-3 rounded-lg">
-            <Link to="/trutests-create">Crear Animal</Link>
-          </button>
-
-          <button className="bg-indigo-500 p-3 rounded-lg">
-            <Link to="/trutests-upload">Subir Trutest</Link>
-          </button>
-
-          <div className="relative inline-block text-left">
-            <button
-              className="bg-indigo-500 p-3 rounded-lg"
-              onClick={toggleDropdown}
-            >
-              {user().username}
-            </button>
-            {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-lg z-10">
-                <Link
-                  to="/logout"
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                >
-                  Logout
-                </Link>
-                <Link
-                  to="/activity-log"
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                >
-                  Activity Log
-                </Link>
-              </div>
-            )}
+        <div className="bg-indigo-500 py-3 w-full">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <Link to="/">
+              <h1 className="font-bold text-3xl text-white">Trutests App</h1>
+            </Link>
+            <NavDropdown
+              label="Tru-Test"
+              items={[
+                {
+                  to: "/trutests-create",
+                  label: "Crear Animal",
+                  onClick: () => {
+                    // Lógica adicional para el botón de Create Animal
+                  },
+                },
+                {
+                  to: "/trutests-upload",
+                  label: "Subir Trutest",
+                  onClick: () => {
+                    // Lógica adicional para el botón de Subir Trutest
+                  },
+                },
+              ]}
+            />
+            <NavDropdown
+              label="Animales"
+              items={[
+                {
+                  to: "/categorias",
+                  label: "Categorias",
+                  onClick: () => {
+                    // Lógica adicional para el botón de Categorias
+                  },
+                },
+                {
+                  to: "/prenadas",
+                  label: "Prenadas",
+                  onClick: () => {
+                    // Lógica adicional para el botón de Prenadas
+                  },
+                },
+              ]}
+            />
+            <NavDropdown
+              label="Estructuras"
+              items={[
+                {
+                  to: "/ubicaciones",
+                  label: "Ubicaciones",
+                  onClick: () => {
+                    // Lógica adicional para el botón de Ubicaciones
+                  },
+                },
+              ]}
+            />
+            <NavDropdown
+              label={user().username}
+              items={[
+                {
+                  to: "/logout",
+                  label: "Logout",
+                  onClick: () => {
+                    // Lógica adicional para el botón de Logout
+                  },
+                },
+                {
+                  to: "/activity-log",
+                  label: "Activity Log",
+                  onClick: () => {
+                    // Lógica adicional para el botón de Activity Log
+                  },
+                },
+              ]}
+            />
           </div>
         </div>
       )}
