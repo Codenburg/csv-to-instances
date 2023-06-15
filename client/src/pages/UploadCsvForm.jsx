@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { CsvTable } from "../components/CsvTable";
+import { CsvTable } from "../components/tables/CsvTable";
 import { uploadTrutest, createTrutest } from "../utils/api/trutests.api";
 import { useNavigate } from "react-router-dom";
 

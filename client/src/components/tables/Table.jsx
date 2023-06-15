@@ -5,7 +5,7 @@ import {
   useGlobalFilter,
   usePagination,
 } from "react-table";
-import { TrutestCard } from "./TrutestCard";
+import { TrutestCard } from "../cards/TrutestCard";
 
 export const Table = ({ data }) => {
   const columns = React.useMemo(

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllTrutests } from "../utils/api/trutests.api";
+import { getAllTrutests } from "../../utils/api/trutests.api";
 import { Table } from "./Table";
 
 export function TrutestsList() {
