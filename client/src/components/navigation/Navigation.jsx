@@ -84,16 +84,10 @@ export function Navigation() {
                 {
                   to: "/trutests-create",
                   label: "Crear Animal",
-                  onClick: () => {
-                    // Lógica adicional para el botón de Create Animal
-                  },
                 },
                 {
                   to: "/trutests-upload",
                   label: "Subir Trutest",
-                  onClick: () => {
-                    // Lógica adicional para el botón de Subir Trutest
-                  },
                 },
               ]}
             />
@@ -103,16 +97,10 @@ export function Navigation() {
                 {
                   to: "/categorias",
                   label: "Categorias",
-                  onClick: () => {
-                    // Lógica adicional para el botón de Categorias
-                  },
                 },
                 {
                   to: "/prenadas",
                   label: "Prenadas",
-                  onClick: () => {
-                    // Lógica adicional para el botón de Prenadas
-                  },
                 },
               ]}
             />
@@ -122,9 +110,6 @@ export function Navigation() {
                 {
                   to: "/ubicaciones",
                   label: "Ubicaciones",
-                  onClick: () => {
-                    // Lógica adicional para el botón de Ubicaciones
-                  },
                 },
               ]}
             />
@@ -134,16 +119,10 @@ export function Navigation() {
                 {
                   to: "/logout",
                   label: "Logout",
-                  onClick: () => {
-                    // Lógica adicional para el botón de Logout
-                  },
                 },
                 {
                   to: "/activity-log",
                   label: "Activity Log",
-                  onClick: () => {
-                    // Lógica adicional para el botón de Activity Log
-                  },
                 },
               ]}
             />
