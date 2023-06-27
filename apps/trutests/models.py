@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Animal(models.Model):
-    ide = models.CharField(max_length=100)
-    idv = models.CharField(max_length=100)
+    ide = models.CharField(max_length=100, unique=True)
+    idv = models.CharField(max_length=100,unique=True)
     fecha = models.CharField(max_length=100, blank=True, null=True)
     hora = models.CharField(max_length=100, blank=True, null=True)
     fecha_de_nac = models.CharField(max_length=100, blank=True, null=True)

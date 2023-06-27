@@ -5,21 +5,21 @@ import {
   useGlobalFilter,
   usePagination,
 } from "react-table";
-import { TrutestCard } from "./TrutestCard";
+import { TrutestCard } from "../cards/TrutestCard";
 
 export const Table = ({ data }) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: "ide",
+        Header: "IDE",
         Cell: ({ row }) => <TrutestCard trutest={row.original} />,
-        accessor: "ide",
+        accessor: "IDE",
       },
-      { Header: "idv", accessor: "idv" },
-      { Header: "raza", accessor: "raza" },
-      { Header: "ubicacion", accessor: "ubicacion" },
-      { Header: "inscripta", accessor: "inscripta" },
-      { Header: "peso", accessor: "peso" },
+      { Header: "IDV", accessor: "idv" },
+      { Header: "RAZA", accessor: "raza" },
+      { Header: "UBICACION", accessor: "ubicacion" },
+      { Header: "INSCRIPTA", accessor: "inscripta" },
+      { Header: "PESO", accessor: "peso" },
     ],
     []
   );
@@ -51,8 +51,8 @@ export const Table = ({ data }) => {
   );
 
   return (
-    <div>
-      <div className="flex items-center justify-between mt-4">
+    <>
+      <div className="flex flex-col items-center justify-center mt-4 sm:flex-row sm:items-center sm:justify-between">
         <input
           type="text"
           value={globalFilter || ""}
@@ -76,7 +76,7 @@ export const Table = ({ data }) => {
           ))}
         </select>
       </div>
-      <table {...getTableProps()} className="w-full overflow-x-auto">
+      <table {...getTableProps()} className="w-full table-auto">
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr
@@ -125,10 +125,13 @@ export const Table = ({ data }) => {
           {page.map((row, i) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} className="bg-white text-black">
+              <tr
+                {...row.getRowProps()}
+                className="bg-white text-black sm:bg-gray-100"
+              >
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()} className="border px-4 py-2">
-                    {cell.column.Header === "peso" ? (
+                    {cell.column.Header === "PESO" ? (
                       <span
                         className={`font-bold ${
                           cell.value < 50
@@ -194,6 +197,6 @@ export const Table = ({ data }) => {
           {">>"}
         </button>
       </div>
-    </div>
+    </>
   );
 };

@@ -39,10 +39,12 @@ THIRD_PARTY_APPS = [
 PROJECTS_APPS = [
     "apps.trutests",
     "apps.account",
+    "apps.establishment",
+    "apps.potreros",
 ]
 
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECTS_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECTS_APPS+ THIRD_PARTY_APPS 
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

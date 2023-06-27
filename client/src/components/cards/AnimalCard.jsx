@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getTrutest } from "../utils/api/trutests.api";
-import { deleteTrutest } from "../utils/api/trutests.api";
+import { getTrutest } from "../../utils/api/trutests.api";
+import { deleteTrutest } from "../../utils/api/trutests.api";
 import { toast } from "react-hot-toast";
 
 export function AnimalCard() {
