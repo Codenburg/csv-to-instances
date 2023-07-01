@@ -8,6 +8,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('trutests/', include('apps.trutests.urls')),
     path('account/',include('apps.account.urls')),
+    path('potreros/',include('apps.potreros.urls')),
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
 ]
 if settings.DEBUG:

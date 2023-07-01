@@ -17,7 +17,7 @@ class Animal(models.Model):
         verbose_name_plural = "Animales"
 
     def __str__(self):
-        return self.ide
+        return f"{self.id} - {self.ide}"
 
 
 class CSVFile(models.Model):
