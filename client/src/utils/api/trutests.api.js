@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import useAxios from "./useAxios";
 import { API_BASE_URL } from "../constants";
 //Auth
@@ -24,19 +24,20 @@ const FileApi = useAxios();
 const animalUrl = `${API_BASE_URL}/trutests/api/v1/animal`;
 const AnimalApi = useAxios();
 
-// Funciones de la API
+// CRUD de los animales
 export const getAllTrutests = () => TrutestsApi.get(trutestsUrl);
 export const getTrutest = (id) => TrutestsApi.get(`${trutestsUrl}/${id}`);
 export const createTrutest = (trutest) =>
-  TrutestsApi.post(trutestsUrl + "/", trutest);
+  TrutestsApi.post(`${trutestsUrl}/${trutest}`);
 export const updateTrutest = (id, trutest) =>
   TrutestsApi.put(`${trutestsUrl}/${id}/`, trutest);
 export const deleteTrutest = (id) => TrutestsApi.delete(`${trutestsUrl}/${id}`);
-
+//Subir Archivo .csv
 export const uploadTrutest = (file) => {
   const formData = new FormData();
   formData.append("file", file);
   return FileApi.post(fileUrl + "/", formData);
 };
-
-export const createAnimal = (animal) => AnimalApi.post(animalUrl + "/", animal);
+// Crear aniamal individual
+export const createAnimal = (animal) =>
+  AnimalApi.post(`${animalUrl}/${animal}`);

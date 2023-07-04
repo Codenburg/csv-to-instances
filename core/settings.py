@@ -39,7 +39,6 @@ THIRD_PARTY_APPS = [
 PROJECTS_APPS = [
     "apps.trutests",
     "apps.account",
-    "apps.establishment",
     "apps.potreros",
 ]
 

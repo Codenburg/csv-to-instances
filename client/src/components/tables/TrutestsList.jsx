@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllTrutests } from "../../utils/api/trutests.api";
-import { Table } from "./Table";
+import { Table } from "./HomeTable";
 
 export function TrutestsList() {
   const [trutests, setTrutests] = useState([]);

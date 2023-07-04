@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../store/auth";
-import { Logout } from "../../pages/Logout";
+import { Logout } from "../../layouts/Logout";
 
 const DropdownItem = ({ to, label, onClick }) => (
   <Link
@@ -105,11 +105,11 @@ export function Navigation() {
               ]}
             />
             <NavDropdown
-              label="Estructuras"
+              label="Establecimientos"
               items={[
                 {
-                  to: "/ubicaciones",
-                  label: "Ubicaciones",
+                  to: "/potreros",
+                  label: "Potreros",
                 },
               ]}
             />

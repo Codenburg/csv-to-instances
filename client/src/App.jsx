@@ -7,7 +7,7 @@ import { AnimalCard } from "./components/cards/AnimalCard";
 import { MainWrapper } from "../src/layouts/MainWrapper";
 import { PrivateRoute } from "../src/layouts/PrivateRoute";
 import { Login } from "../src/pages/Login";
-import { Logout } from "../src/pages/Logout";
+import { Logout } from "../src/layouts/Logout";
 import { Navigation } from "./components/navigation/Navigation";
 
 
